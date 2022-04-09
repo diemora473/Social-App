@@ -3,10 +3,12 @@ import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from "@
 import useStyles from './styles'
 import { GoogleLogin } from 'react-google-login';
 import LockOutLinedIcon from '@material-ui/icons/LockOutlined'
+import { signin, signup } from '../../actions/auth'
 import { useDispatch } from "react-redux";
 import Input from "./Input";
 import Icon from "./Icon";
 import { useHistory } from 'react-router-dom'
+const inicialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
 const Auth = () => {
     // const isSignup = true;
     const [showPassword, setShowPassword] = useState(false)
@@ -14,12 +16,19 @@ const Auth = () => {
     const dispatch = useDispatch()
     const [isSignup, setIsSignup] = useState(false)
     const classes = useStyles()
+    const [formData, setFormData] = useState(inicialState)
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
-    const handleSubmit = () => {
-
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (isSignup) {
+            dispatch(signup(formData, history))
+        } else {
+            dispatch(signin(formData, history))
+        }
     }
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        e.preventDefault()
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     }
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup)
@@ -54,7 +63,7 @@ const Auth = () => {
                         {isSignup && (
                             <>
                                 <Input name='firstName' label='first name' handleChange={handleChange} autoFocus half></Input>
-                                <Input name='firstName' label='first name' handleChange={handleChange} half></Input>
+                                <Input name='lastName' label='Last name' handleChange={handleChange} half></Input>
                             </>
                         )}
                         <Input name='email' label='Email Address' handleChange={handleChange} type='email' />
