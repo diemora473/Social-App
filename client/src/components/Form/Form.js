@@ -10,7 +10,7 @@ const Form = ({ currentId, setCurrentId }) => {
     const classes = useStyles()
     const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null)
     const dispatch = useDispatch()
-    const user = JSON.parse(localStorage.getItem('profile'))
+    const user = JSON.parse(localStorage.getItem('profile'));
     const [postData, setPostData] = useState({
         title: '', message: '', tags: '', selectecFile: ''
     })
@@ -19,15 +19,17 @@ const Form = ({ currentId, setCurrentId }) => {
         if (currentId === 0) {
 
             dispatch(createPost({ ...postData, name: user?.result?.name }))
+            clear()
         } else {
 
             dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }))
+            clear()
         }
         // dispatch(updatePost(currentId, postData))
         clear();
     }
     const clear = () => {
-        // setCurrentId(null)
+        setCurrentId(0)
         setPostData({ title: '', message: '', tags: '', selectecFile: '' })
     }
     useEffect(() => {

@@ -17,7 +17,9 @@ const auth = async (req, res, next) => {
 
             req.userId = decodedData?.sub;
         }
-
+        if (token >= isCustomAuth * 1000) {
+            return false;
+        }
         next();
     } catch (error) {
         console.log(error)
