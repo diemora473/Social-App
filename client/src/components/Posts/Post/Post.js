@@ -30,11 +30,14 @@ const Post = ({ post, setCurrentId }) => {
                 <Typography variant='h6'>{post.name}</Typography>
                 <Typography variant='body'>{moment(post.createdAt).fromNow()}</Typography>
             </div>
-            <div className={classes.overlay2}>
-                <Button style={{ color: 'white' }} size='small' >
-                    <MoreHorizIcon fontSize='default' onClick={() => setCurrentId(post._id)} />
-                </Button>
-            </div>
+            {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+                <div className={classes.overlay2}>
+
+                    <Button style={{ color: 'white' }} size='small' >
+                        <MoreHorizIcon fontSize='default' onClick={() => setCurrentId(post._id)} />
+                    </Button>
+                </div>
+            )}
             <div className={classes.details}>
                 <Typography variant='body2' color='textSecondary'>{post.tags.map((tag) => `#${tag}`)}</Typography>
             </div>
@@ -49,11 +52,14 @@ const Post = ({ post, setCurrentId }) => {
                     <Likes />
 
                 </Button>
-                <Button size='small' color='primary'>
-                    <DeleteIcon fontSize='small' onClick={() => dispatch(deletePost(post._id))} />
-                    Delete
-                    {/* {post.likeCount} */}
-                </Button>
+                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+
+                    <Button size='small' color='primary'>
+                        <DeleteIcon fontSize='small' onClick={() => dispatch(deletePost(post._id))} />
+                        Delete
+                        {/* {post.likeCount} */}
+                    </Button>
+                )}
             </CardActions>
         </Card>
     )
