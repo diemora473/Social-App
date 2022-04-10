@@ -11,7 +11,7 @@ const App = () => {
       <Container>
         {/* <Navbar /> */}
         <Switch>
-          <Route path='/home' exact component={Home} />
+          <Route path='/' exact component={Home} />
           <Route path='/auth' exact component={Auth} />
         </Switch>
         {/* <Home /> */}

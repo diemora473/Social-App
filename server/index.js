@@ -19,5 +19,5 @@ const PORT = process.env.PORT
 
 mongoose.connect(process.env.CONNECTION_URL)
     .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
-    .catch((error) => console.log(error.mensaje));
+    .catch((error) => console.log(error));
 // mongoose.set("useFindAndModify", false);

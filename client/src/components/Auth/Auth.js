@@ -10,7 +10,6 @@ import Icon from "./Icon";
 import { useHistory } from 'react-router-dom'
 const inicialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
 const Auth = () => {
-    // const isSignup = true;
     const [showPassword, setShowPassword] = useState(false)
     const history = useHistory()
     const dispatch = useDispatch()
@@ -20,6 +19,7 @@ const Auth = () => {
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(formData)
         if (isSignup) {
             dispatch(signup(formData, history))
         } else {
@@ -32,7 +32,7 @@ const Auth = () => {
     }
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup)
-        handleShowPassword(false)
+        setShowPassword(false)
     }
     const googleSuccess = async (res) => {
         const result = res?.profileObj;
