@@ -13,6 +13,15 @@ export const getPosts = async (req, res) => {
     }
 
 }
+
+export const getPostsBySearch = async (req, res) => {
+    try {
+
+    } catch (error) {
+
+    }
+}
+
 export const createPost = async (req, res) => {
     const post = req.body;
 
